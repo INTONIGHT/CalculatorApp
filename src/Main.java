@@ -22,12 +22,49 @@ public class Main implements ActionListener{
 
 		frame = new JFrame("Calculator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(550, 550);
+		frame.setSize(420, 550);
 		frame.setLayout(null);
 		
+		textField = new JTextField();
+		textField.setBounds(50,25,300,50);
+		textField.setFont(myFont);
+		textField.setEditable(false);
+		
+		addButton = new JButton("+");
+		subtractButton = new JButton("-");
+		multButton = new JButton("*");
+		divButton = new JButton("/");
+		decButton = new JButton(".");
+		equButton = new JButton("=");
+		delButton = new JButton("Delete");
+		clrButton = new JButton("Clear");
+		
+		functionButtons[0] = addButton;
+		functionButtons[1] = subtractButton;
+		functionButtons[2] = multButton;
+		functionButtons[3] = divButton;
+		functionButtons[4] = decButton;
+		functionButtons[5] = equButton;
+		functionButtons[6] = delButton;
+		functionButtons[7] = clrButton;
+		
+		for(int i =0; i<functionButtons.length - 1; i++) {
+			functionButtons[i].addActionListener(this);
+			functionButtons[i].setFont(myFont);
+			functionButtons[i].setFocusable(false);
+		}
+		for(int i = 0; i<numberButtons.length - 1;i++) {
+			numberButtons[i] = new JButton(String.valueOf(i));
+			numberButtons[i].setFont(myFont);
+			numberButtons[i].setFocusable(false);
+		}
+		delButton.setBounds(50, 430, 145, 50);
+		clrButton.setBounds(205, 430, 145, 50);
 		
 		
-		
+		frame.add(delButton);
+		frame.add(clrButton);
+		frame.add(textField);
 		frame.setVisible(true);
 	}
 	public static void main(String[] args) {
