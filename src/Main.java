@@ -48,20 +48,44 @@ public class Main implements ActionListener{
 		functionButtons[6] = delButton;
 		functionButtons[7] = clrButton;
 		
-		for(int i =0; i<functionButtons.length - 1; i++) {
+		for(int i =0; i<functionButtons.length ; i++) {
 			functionButtons[i].addActionListener(this);
 			functionButtons[i].setFont(myFont);
 			functionButtons[i].setFocusable(false);
 		}
-		for(int i = 0; i<numberButtons.length - 1;i++) {
+		for(int i = 0; i<numberButtons.length;i++) {
 			numberButtons[i] = new JButton(String.valueOf(i));
+			numberButtons[i].addActionListener(this);
 			numberButtons[i].setFont(myFont);
 			numberButtons[i].setFocusable(false);
 		}
 		delButton.setBounds(50, 430, 145, 50);
 		clrButton.setBounds(205, 430, 145, 50);
 		
+		panel = new JPanel();
+		panel.setBounds(50, 100, 300, 300);
+		panel.setLayout(new GridLayout(4,4,10,10));
 		
+
+		panel.add(numberButtons[1]);
+		panel.add(numberButtons[2]);
+		panel.add(numberButtons[3]);
+		panel.add(addButton);
+		panel.add(numberButtons[4]);
+		panel.add(numberButtons[5]);
+		panel.add(numberButtons[6]);
+		panel.add(subtractButton);
+		panel.add(numberButtons[7]);
+		panel.add(numberButtons[8]);
+		panel.add(numberButtons[9]);
+		panel.add(multButton);
+		panel.add(decButton);
+		panel.add(numberButtons[0]);
+		panel.add(equButton);
+		panel.add(divButton);
+		
+		
+		frame.add(panel);
 		frame.add(delButton);
 		frame.add(clrButton);
 		frame.add(textField);
@@ -74,7 +98,11 @@ public class Main implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < 10; i ++) {
+			if(e.getSource() == numberButtons[i]) {
+				textField.setText(textField.getText().concat(String.valueOf(i)));
+			}
+		}
 	}
 
 }
