@@ -7,10 +7,10 @@ public class Main implements ActionListener{
 	JFrame frame;
 	JTextField textField;
 	JButton[] numberButtons = new JButton[10];
-	JButton[] functionButtons = new JButton[8];
+	JButton[] functionButtons = new JButton[9];
 	
 	JButton addButton,subtractButton,multButton,divButton;
-	JButton decButton, equButton, delButton, clrButton;
+	JButton decButton, equButton, delButton, clrButton, negButton;
 	JPanel panel;
 	
 	Font myFont = new Font("Ink Free",Font.BOLD,30);
@@ -38,6 +38,7 @@ public class Main implements ActionListener{
 		equButton = new JButton("=");
 		delButton = new JButton("Delete");
 		clrButton = new JButton("Clear");
+		negButton = new JButton("(-)");
 		
 		functionButtons[0] = addButton;
 		functionButtons[1] = subtractButton;
@@ -47,6 +48,7 @@ public class Main implements ActionListener{
 		functionButtons[5] = equButton;
 		functionButtons[6] = delButton;
 		functionButtons[7] = clrButton;
+		functionButtons[8] = negButton;
 		
 		for(int i =0; i<functionButtons.length ; i++) {
 			functionButtons[i].addActionListener(this);
@@ -59,8 +61,9 @@ public class Main implements ActionListener{
 			numberButtons[i].setFont(myFont);
 			numberButtons[i].setFocusable(false);
 		}
-		delButton.setBounds(50, 430, 145, 50);
-		clrButton.setBounds(205, 430, 145, 50);
+		negButton.setBounds(50, 430, 100, 50);
+		delButton.setBounds(150, 430, 100, 50);
+		clrButton.setBounds(250, 430, 100, 50);
 		
 		panel = new JPanel();
 		panel.setBounds(50, 100, 300, 300);
@@ -88,6 +91,7 @@ public class Main implements ActionListener{
 		frame.add(panel);
 		frame.add(delButton);
 		frame.add(clrButton);
+		frame.add(negButton);
 		frame.add(textField);
 		frame.setVisible(true);
 	}
@@ -102,6 +106,66 @@ public class Main implements ActionListener{
 			if(e.getSource() == numberButtons[i]) {
 				textField.setText(textField.getText().concat(String.valueOf(i)));
 			}
+		}
+		if(e.getSource() == decButton) {
+			if(textField.getText().contains(".")) {
+				return;
+			}
+			textField.setText(textField.getText().concat("."));
+		}
+		if(e.getSource() == addButton) {
+			num1 = Double.parseDouble(textField.getText());
+			operator = '+';
+			textField.setText("");	
+		}
+		if(e.getSource() == subtractButton) {
+			num1 = Double.parseDouble(textField.getText());
+			operator = '-';
+			textField.setText("");	
+		}
+		if(e.getSource() == multButton) {
+			num1 = Double.parseDouble(textField.getText());
+			operator = '*';
+			textField.setText("");	
+		}
+		if(e.getSource() == divButton) {
+			num1 = Double.parseDouble(textField.getText());
+			operator = '/';
+			textField.setText("");	
+		}
+		if(e.getSource() == equButton) {
+			num2 = Double.parseDouble(textField.getText());
+			switch(operator) {
+			case '+':
+				result = num1 + num2;
+				break;
+			case '-':
+				result = num1 - num2;
+				break;
+			case '*':
+				result = num1 * num2;
+				break;
+			case '/':
+				result = num1 / num2;
+				break;
+			}
+			textField.setText(String.valueOf(result));
+			num1 = result;
+		}
+		if(e.getSource() == clrButton) {
+			textField.setText("");
+		}
+		if (e.getSource() == delButton) {
+			String temp = textField.getText();
+			textField.setText("");
+			for(int i =0; i < temp.length() - 1; i++) {
+				textField.setText(textField.getText() + temp.charAt(i));
+			}
+		}
+		if (e.getSource() == negButton) {
+			double temp = Double.parseDouble(textField.getText());
+			temp *= -1;
+			textField.setText(String.valueOf(temp));
 		}
 	}
 
